@@ -1,0 +1,111 @@
+{
+    "api": "mtop.taobao.order.queryboughtlistv2",
+    "data": {
+        "useDoubleQuotation": true,
+        "endpoint": {
+            "mode": "wireless_default",
+            "osVersion": ""
+        },
+        "reload": false,
+        "data": {
+            "meta": {
+                "template": {
+                    "cellType": "template",
+                    "cellData": [
+                        {
+                            "tag": "template",
+                            "id": "1",
+                            "type": "biz",
+                            "fields": {
+                                "isForce": false,
+                                "tfsId": "TB1b.wEs7cx_u4jSZFlhA0nUFXa"
+                            }
+                        }
+                    ]
+                },
+                "dynamic": {
+                    "tag": "dynamic",
+                    "id": "1",
+                    "type": "biz",
+                    "fields": {
+                        "templates": [
+                            {
+                                "level": "0",
+                                "name": "d3_tborderlistnormalbuy",
+                                "useSwitch": "true",
+                                "version": "1",
+                                "url": "https://ossgw.alicdn.com/rapid-oss-bucket/1595298046811/d3_tborderlistnormalbuy.zip",
+                                "tags": "normalBuy",
+                                "md5": "d9c938204aa1f473836aa3904d9c55b0"
+                            }
+                        ]
+                    }
+                },
+                "page": {
+                    "tag": "page",
+                    "id": "1",
+                    "type": "biz",
+                    "fields": {
+                        "totalNumber": 329,
+                        "prefetchCount": 314,
+                        "totalPage": 22,
+                        "pageSize": 15,
+                        "globalCodes": [],
+                        "queryForTitle": false,
+                        "currentPage": 1
+                    }
+                },
+                "preSellDeposit": null,
+                "searchEntrance": {
+                    "tag": "searchEntrance",
+                    "id": "1",
+                    "type": "biz",
+                    "fields": {
+                        "weexUrl": "https://market.m.taobao.com/app/tb-source-app/order-search/pages/index?wh_weex=true&wx_navbar_hidden=true&wx_navbar_transparent=true&showBanner=true&newEntrance=true"
+                    }
+                },
+                "loadTemplate": true
+            },
+            "group": []
+        },
+        "coConverterResult": null,
+        "hierarchy": null,
+        "structures": [
+            {
+                "representTag": "bought",
+                "subStructureInstance": [
+                    {
+                        "representTag": "page",
+                        "subStructureInstance": [],
+                        "structureInstanceId": "1"
+                    },
+                    {
+                        "representTag": "template",
+                        "subStructureInstance": [],
+                        "structureInstanceId": "1"
+                    },
+                    {
+                        "representTag": "dynamic",
+                        "subStructureInstance": [],
+                        "structureInstanceId": "1"
+                    },
+                    {
+                        "representTag": "searchEntrance",
+                        "subStructureInstance": [],
+                        "structureInstanceId": "1"
+                    }
+                ],
+                "structureInstanceId": "1"
+            }
+        ],
+        "linkage": null,
+        "componentWrappers": null,
+        "local": null,
+        "commonLinkages": null
+    },
+    "ret": [
+        "SUCCESS::\u8c03\u7528\u6210\u529f"
+    ],
+    "traceId": "2100c90417860519455454480e0c91",
+    "v": "1.0"
+}

@@ -1,0 +1,29 @@
+[Unit]
+Description=MySyte Telegram Bot - Warehouse Operations
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/mysyte
+Environment="PATH=/opt/mysyte/venv/bin"
+Environment="PYTHONUNBUFFERED=1"
+
+# Запуск бота
+ExecStart=/opt/mysyte/venv/bin/python /opt/mysyte/start_telegram_bot.py
+
+# Автоматический перезапуск при падении
+Restart=always
+RestartSec=10
+
+# Логирование
+StandardOutput=append:/var/log/mysyte/telegram_bot.log
+StandardError=append:/var/log/mysyte/telegram_bot_error.log
+
+# Безопасность
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

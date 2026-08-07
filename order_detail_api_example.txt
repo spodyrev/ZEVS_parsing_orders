@@ -1,0 +1,45 @@
+# Пример запроса для получения деталей заказа
+
+## API Endpoint
+```
+https://h5api.m.taobao.com/h5/mtop.taobao.order.query.detailv2/1.0/
+```
+
+## Метод
+POST (с данными в body)
+
+## Параметры URL (Query Parameters)
+```
+jsv=2.7.2
+appKey=12574478
+t=1786059022069 (timestamp в миллисекундах)
+sign=b3374e5009ec4a630e4adfdc8fe92163 (MD5 подпись)
+v=1.0
+api=mtop.taobao.order.query.detailv2
+```
+
+## POST Data
+```json
+{
+  "useV2": "true",
+  "appVersion": "3.0",
+  "archive": false,
+  "appName": "tborder",
+  "from": "OrderListActivity",
+  "extParams": "{\"weexPage\":\"neworderdetail4\",\"openFrom\":\"taoBoughtList\"}",
+  "bizOrderId": "3316188865004009384"
+}
+```
+
+## Важные заметки
+- `bizOrderId` - это ID заказа, для которого нужно получить детали
+- Требуется подпись (sign) - MD5 hash от `token&timestamp&appKey&data`
+- Требуются cookies для авторизации
+
+## Full cURL для тестирования
+```bash
+curl 'https://h5api.m.taobao.com/h5/mtop.taobao.order.query.detailv2/1.0/?jsv=2.7.2&appKey=12574478&t=1786059022069&sign=b3374e5009ec4a630e4adfdc8fe92163&v=1.0&ecode=1&timeout=6000&dataType=json&valueType=original&ttid=1%40tbwang_mac_1.0.0%23pc&needLogin=true&type=originaljson&isHttps=1&needRetry=true&api=mtop.taobao.order.query.detailv2&preventFallback=true' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -b '[cookies here]' \
+  --data-raw 'data=%7B%22useV2%22%3A%22true%22%2C%22appVersion%22%3A%223.0%22%2C%22archive%22%3Afalse%2C%22appName%22%3A%22tborder%22%2C%22from%22%3A%22OrderListActivity%22%2C%22extParams%22%3A%22%7B%5C%22weexPage%5C%22%3A%5C%22neworderdetail4%5C%22%2C%5C%22openFrom%5C%22%3A%5C%22taoBoughtList%5C%22%7D%22%2C%22bizOrderId%22%3A%223316188865004009384%22%7D'
+```

@@ -1,0 +1,90 @@
+=== ЭНДПОИНТ ДЛЯ СПИСКА ЗАКАЗОВ ===
+
+URL: 
+[Сюда вставь Request URL, например:]
+https://h5api.m.taobao.com/h5/mtop.taobao.order.queryboughtlistv2/1.0/?jsv=2.7.2&appKey=12574478&t=1786046727988&sign=8190052c96db59049a2c631b83e0a767&v=1.0&ecode=1&timeout=8000&dataType=json&valueType=original&ttid=1%40tbwang_mac_1.0.0%23pc&needLogin=true&type=originaljson&isHttps=1&needRetry=true&api=mtop.taobao.order.queryboughtlistV2&__customTag__=boughtList_all_OrderList&preventFallback=true
+Метод: 
+[GET или POST - смотри в Request Method]
+
+Headers (важные):
+[cookie2=1d17ccea6f88c6703073a1ac9dfaa776; t=d2b193a86ea621a8c0ac10999ced5d32; _tb_token_=376e60e7743b7; wk_cookie2=19467a4bc5300d010c49c1843b38cb5a; wk_unb=UUphzOVxgPOIAythnQ%3D%3D; thw=xx; aui=2206701688429; wwUserTip=false; ariaDefaultTheme=default; ariaFixed=true; ariaReadtype=1; ariaoldFixedStatus=false; ariaStatus=false; cna=sjLhIue2+SsBASgEB1ztlImh; sn=; lgc=spodirev; cancelledSubSites=empty; dnk=spodirev; tracknick=spodirev; _samesite_flag_=true; 3PcFlag=1786044581761; xlly_s=1; unb=2206701688429; uc1=pas=0&cookie15=Vq8l%2BKCLz3%2F65A%3D%3D&cookie21=VT5L2FSpczFp&cookie14=UoYWO6njk4IfeQ%3D%3D&existShop=false&cookie16=UIHiLt3xCS3yM2h4eKHS9lpEOw%3D%3D; uc3=vt3=F8dD1NjO8c%2F2g9DiTSA%3D&lg2=UtASsssmOIJ0bQ%3D%3D&id2=UUphzOVxgPOIAythnQ%3D%3D&nk2=EE479SDzEgE%3D; csg=2972f286; cookie17=UUphzOVxgPOIAythnQ%3D%3D; skt=940951ed4239313e; existShop=MTc4NjA0NTExNQ%3D%3D; uc4=id4=0%40U2grF86%2BAWV7Fm54ZSRH9isynVhHpZ7I&nk4=0%40Epd95p6QpHngf8mrJ%2B8FASiPZQ%3D%3D; _cc_=VFC%2FuZ9ajQ%3D%3D; _l_g_=Ug%3D%3D; sg=v98; _nk_=spodirev; cookie1=BqVuimkJchjfSkcBUGORLElls2bVCV%2B998855N3kxLQ%3D; sgcookie=E100gH5gVupp8I13OZgjFzoDQuFfsWHZ5CO4OrNRrC%2BBr%2BsM9AG6P8u8I6NHI12ropl9mxpw57RmbWCAm%2Bpgh2Su9AbNkl8d6jObboJIEzkpaaU%3D; ultraCookieBase=1k6S5%2BcxkgQpZABmsRPEFh21CbcbOKs413oTBFVxv%2FuU4OSVxXRDK1bxArJRy9goGjlO7TxJPQov5Ns%2FO93pPXRNJl96HiTzQ59aT8%2BjAOapSMxUsPHSaAVNdKO1tnIQEvHHZ2%2FVAuPLjRXdTwa6d%2F%2FgqkwTyyCjxG6MLXFpPrpw0v%2FCCpazICnbs5%2FQf2UmTIHqrVaXrMqglx5h8dmrLAumJXij%2Ftxjv56dK0yK%2BDFhNXkqCLuW%2F%2FQl8j%2BgyWIu79yjFmCPIxLe4a2SZg0tfEcLfKuXTYkNqy7fQvJg8clfxtbw%2BJnbBX36ypQW1Dn0m6ySO7UehjA%3D%3D; fastSlient=1786046650570; mtop_partitioned_detect=1; _m_h5_tk=2c238e4aa22982d525965fc090ba9e31_1786057103989; _m_h5_tk_enc=a028286290343a32ff74dd705743b703; sca=bbc7edc5; isg=BM3NPLM0m9gTQD_da6PCvt8n3O9HqgF8mwW2NQ9Sz2TTBuy41_50TAqVdIJgxhk0; tfstk=h-AjXDf94u7VjsfZEkXKDlCDi15tXhSNbFIOlgjxSZy41OLH7qAZoFQO13KZoi8tmhO12eQZoc0DVfTHAt5w3i79V3xbg5lmIhN9vnFZmKSa1CTO4hurTX8-hUMWGGEN6-GWu4oEYXlrHzCscFPwUCs8ewjRkSIAD41Ruw1TBtKO2TQd8oCO6hL-PNQdWNQAkzCRSN5OXhCtPUIl51QvX13WygbOycd-Y5GVoOOJ9VPFhMLSZ5Fs7Z6fvEdb65UGlFYPxhVxOgp2BI5JM03AwevyDa1I1P_WdUCAlhc3isLpydIe15yv_CJgIsEL4CfWBnJPHabXo4g7cOXAra1nP4wgItQlzzgSPo6G.
+Cookie: 
+
+Пример: _tb_token_=abc123; cookie2=def456; ...
+
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 YaBrowser/26.6.0.0 Safari/537.36
+[Скопируй из Headers]
+Пример: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ...
+
+Другие важные headers:
+[Если есть что-то типа x-csrf-token, x-auth-token - скопируй сюда]
+
+
+=== ПАРАМЕТРЫ ЗАПРОСА (Query Parameters) ===
+
+[Это то, что идет после ? в URL]
+Например:
+- page: 1 (номер страницы)
+- pageSize: 15 (количество заказов на странице)
+- orderStatus: all (фильтр по статусу)
+
+
+=== СТРУКТУРА ОТВЕТА (Response) ===
+
+[Вставь сюда JSON ответ, который увидел во вкладке Response]
+Пример:
+{
+  "success": true,
+  "data": {
+    "orders": [
+      {
+        "orderId": "123456789",
+        "status": "WAIT_BUYER_CONFIRM_GOODS",
+        "itemTitle": "Название товара",
+        "payment": "299.00",
+        "logisticsNo": "RF123456789CN",
+        "createTime": "2024-01-15 10:30:00"
+      }
+    ],
+    "totalPage": 5
+  }
+}
+
+
+=== ВАЖНЫЕ COOKIES (для авторизации) ===
+
+Из всей длинной строки cookie выпиши отдельно эти (если есть):
+- _tb_token_ = [значение]
+- cookie2 = [значение]
+- t = [значение]
+- _samesite_flag_ = [значение]
+
+Это нужно, чтобы наш парсер мог авторизоваться!
+
+
+=== СТАТУСЫ ЗАКАЗОВ ===
+
+[Посмотри в JSON ответе поле "status" у разных заказов]
+[Запиши все найденные варианты]
+
+Найденные статусы:
+- WAIT_BUYER_PAY = не оплачен (ждет оплаты)
+- WAIT_SELLER_SEND_GOODS = оплачен, ждет отправки продавцом
+- WAIT_BUYER_CONFIRM_GOODS = отправлен, в пути
+- TRADE_FINISHED = завершен, доставлен
+- TRADE_CLOSED = отменен
+- [другие, если найдешь]
+
+
+=== ПОЛНЫЙ CURL ЗАПРОС ===
+
+[Вставь сюда то, что скопировал через "Copy as cURL"]
+Это нужно для тестирования!
+
+
+=== ЗАМЕТКИ ===
+
+- Дата находки: [сегодняшняя дата]
+- Работает ли без авторизации: НЕТ (нужны cookies)
+- Есть ли капча: [проверь]
+- Лимит запросов: [если заметил ограничения]

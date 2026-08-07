@@ -1,0 +1,1029 @@
+/* ========================================
+   TESLA-STYLE DESIGN
+   Modern, Minimalist, Clean
+   ======================================== */
+
+/* Import Tesla-like fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ========================================
+   ROOT VARIABLES (Tesla Color Palette)
+   ======================================== */
+:root {
+    --tesla-black: #171a20;
+    --tesla-dark-gray: #222222;
+    --tesla-gray: #393c41;
+    --tesla-light-gray: #5c5e62;
+    --tesla-silver: #f4f4f4;
+    --tesla-white: #ffffff;
+    --tesla-red: #e82127;
+    --tesla-blue: #3e6ae1;
+    --tesla-green: #00b74f;
+    --tesla-shadow: rgba(23, 26, 32, 0.08);
+    --tesla-shadow-hover: rgba(23, 26, 32, 0.16);
+}
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background-color: var(--tesla-white);
+    color: var(--tesla-black);
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--tesla-black);
+}
+
+h1 { font-size: 40px; font-weight: 700; }
+h2 { font-size: 32px; font-weight: 600; }
+h3 { font-size: 24px; font-weight: 600; }
+h4 { font-size: 20px; font-weight: 600; }
+h5 { font-size: 16px; font-weight: 600; }
+
+/* ========================================
+   HEADER (Minimal ZEVS Style)
+   ======================================== */
+.header-minimal {
+    background: var(--tesla-white);
+    border-bottom: 1px solid var(--tesla-silver);
+    padding: 6px 0;
+}
+
+.logo-link {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.logo-link:hover {
+    opacity: 0.8;
+}
+
+.company-logo {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+}
+
+.btn-sync-minimal {
+    background: var(--tesla-black);
+    color: var(--tesla-white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-sync-minimal:hover {
+    background: var(--tesla-gray);
+    color: var(--tesla-white);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--tesla-shadow-hover);
+}
+
+.btn-sync-minimal i {
+    font-size: 14px;
+}
+
+.btn-add-manual {
+    background: var(--tesla-blue);
+    color: var(--tesla-white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-add-manual:hover {
+    background: #2e5ad1;
+    color: var(--tesla-white);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--tesla-shadow-hover);
+}
+
+.btn-add-manual i {
+    font-size: 14px;
+}
+
+.btn-trash-minimal {
+    background: var(--tesla-light-gray);
+    color: var(--tesla-white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-trash-minimal:hover {
+    background: var(--tesla-gray);
+    color: var(--tesla-white);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--tesla-shadow-hover);
+}
+
+.btn-trash-minimal i {
+    font-size: 14px;
+}
+
+/* Компактный заголовок модального окна */
+#addOrderModal .modal-header,
+#editOrderModal .modal-header {
+    padding: 10px 16px;
+    background: var(--tesla-black);
+    border-bottom: 1px solid var(--tesla-gray);
+}
+
+#addOrderModal .modal-title,
+#editOrderModal .modal-title {
+    color: var(--tesla-white);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#addOrderModal .modal-header small,
+#editOrderModal .modal-header small {
+    color: var(--tesla-silver);
+    font-size: 11px;
+    display: block;
+    margin-top: 2px;
+}
+
+#addOrderModal .btn-close,
+#editOrderModal .btn-close {
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+}
+
+#addOrderModal .btn-close:hover,
+#editOrderModal .btn-close:hover {
+    opacity: 1;
+}
+
+/* Кнопки действий для заказов */
+.action-btn-edit {
+    background: #3e6ae1;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.action-btn-edit:hover {
+    background: #2e5ad1;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(62, 106, 225, 0.3);
+}
+
+.action-btn-archive {
+    background: #ffffff;
+    color: #393c41;
+    border: 2px solid #393c41;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.action-btn-archive:hover {
+    background: #393c41;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(57, 60, 65, 0.3);
+}
+
+.action-btn-unarchive {
+    background: #00b74f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.action-btn-unarchive:hover {
+    background: #009940;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 183, 79, 0.3);
+}
+
+.action-btn-delete {
+    background: #e82127;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.action-btn-delete:hover {
+    background: #d01117;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(232, 33, 39, 0.3);
+}
+
+/* Old navbar styles (kept for compatibility) */
+.navbar {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%) !important;
+    padding: 20px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: none;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(20px);
+}
+
+.navbar-brand {
+    color: var(--tesla-white) !important;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.navbar-brand:hover {
+    transform: translateY(-2px);
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.brand-icon {
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #ffd700, #ffa500);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.brand-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #ffd700, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+}
+
+.brand-subtitle {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+}
+
+.btn-sync {
+    background: linear-gradient(135deg, #ffd700, #ffa500);
+    color: #000;
+    border: none;
+    padding: 12px 28px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-radius: 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-sync:hover {
+    background: linear-gradient(135deg, #ffa500, #ff8c00);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 165, 0, 0.5);
+}
+
+.btn-sync:active {
+    transform: translateY(0);
+}
+
+.btn-sync-text {
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .company-logo {
+        height: 24px;
+    }
+    
+    .btn-sync-minimal .btn-sync-text,
+    .btn-add-manual .btn-text,
+    .btn-trash-minimal .btn-text {
+        display: none;
+    }
+    
+    .btn-sync-minimal,
+    .btn-add-manual,
+    .btn-trash-minimal {
+        padding: 8px 12px;
+    }
+    
+    .brand-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+    
+    .brand-title {
+        font-size: 20px;
+    }
+    
+    .brand-subtitle {
+        font-size: 9px;
+    }
+    
+    .btn-sync-text {
+        display: none;
+    }
+    
+    .btn-sync {
+        padding: 12px 16px;
+    }
+}
+
+/* ========================================
+   CONTAINER
+   ======================================== */
+.container {
+    max-width: 1400px;
+    padding: 0 24px;
+}
+
+/* ========================================
+   COMPACT STATISTICS (Tesla Style)
+   ======================================== */
+.stats-compact {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-card {
+    background: var(--tesla-white);
+    border: 1px solid rgba(23, 26, 32, 0.08);
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 6px rgba(23, 26, 32, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--tesla-black);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(23, 26, 32, 0.12);
+    border-color: rgba(23, 26, 32, 0.15);
+}
+
+.stat-card:hover::before {
+    transform: scaleX(1);
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--tesla-black);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--tesla-light-gray);
+    text-align: center;
+}
+
+/* Color variations */
+.stat-card.stat-warning::before {
+    background: #fbbf24;
+}
+
+.stat-card.stat-success::before {
+    background: var(--tesla-green);
+}
+
+.stat-card.stat-info::before {
+    background: var(--tesla-blue);
+}
+
+.stat-card.stat-warning:hover {
+    border-color: #fbbf24;
+}
+
+.stat-card.stat-success:hover {
+    border-color: var(--tesla-green);
+}
+
+.stat-card.stat-info:hover {
+    border-color: var(--tesla-blue);
+}
+
+/* Old card styles (for other uses if needed) */
+.card {
+    background: var(--tesla-white);
+    border: 1px solid rgba(23, 26, 32, 0.06);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px var(--tesla-shadow);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+}
+
+.card-body {
+    padding: 28px 24px;
+}
+
+/* ========================================
+   TABS (Tesla Style)
+   ======================================== */
+.nav-tabs {
+    border: none;
+    margin-bottom: 32px;
+}
+
+.nav-tabs .nav-link {
+    color: var(--tesla-gray);
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-tabs .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 80%;
+    height: 3px;
+    background: var(--tesla-black);
+    transition: transform 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--tesla-black);
+    background: var(--tesla-silver);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--tesla-black);
+    background: transparent;
+    font-weight: 700;
+}
+
+.nav-tabs .nav-link.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* ========================================
+   FILTERS & BUTTONS
+   ======================================== */
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--tesla-gray);
+}
+
+.btn-group .btn {
+    border: 2px solid var(--tesla-gray);
+    color: var(--tesla-dark-gray);
+    font-weight: 600;
+    font-size: 12px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--tesla-white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 4px;
+    box-shadow: 0 2px 4px rgba(23, 26, 32, 0.08);
+}
+
+.btn-group .btn:hover {
+    background: var(--tesla-dark-gray);
+    color: var(--tesla-white);
+    border-color: var(--tesla-dark-gray);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(23, 26, 32, 0.15);
+}
+
+.btn-group .btn.active {
+    background: var(--tesla-black);
+    color: var(--tesla-white);
+    border-color: var(--tesla-black);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(23, 26, 32, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Цветные варианты для разных типов фильтров */
+.btn-outline-primary.active {
+    background: var(--tesla-blue) !important;
+    border-color: var(--tesla-blue) !important;
+}
+
+.btn-outline-info.active {
+    background: var(--tesla-blue) !important;
+    border-color: var(--tesla-blue) !important;
+}
+
+.btn-outline-warning.active {
+    background: #fbbf24 !important;
+    border-color: #fbbf24 !important;
+    color: var(--tesla-black) !important;
+}
+
+.btn-outline-success.active {
+    background: var(--tesla-green) !important;
+    border-color: var(--tesla-green) !important;
+}
+
+.btn-outline-danger.active {
+    background: var(--tesla-red) !important;
+    border-color: var(--tesla-red) !important;
+}
+
+.btn-outline-primary,
+.btn-outline-info,
+.btn-outline-warning,
+.btn-outline-success,
+.btn-outline-danger {
+    font-weight: 500;
+}
+
+/* ========================================
+   TABLE (Tesla Minimalist Style)
+   ======================================== */
+.table-container {
+    background: var(--tesla-white);
+    border-radius: 16px;
+    box-shadow: 0 2px 12px var(--tesla-shadow);
+    overflow: hidden;
+    border: 1px solid rgba(23, 26, 32, 0.06);
+}
+
+#ordersTable {
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+#ordersTable thead {
+    background: var(--tesla-black);
+}
+
+#ordersTable thead th {
+    color: var(--tesla-white);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-size: 11px;
+    padding: 18px 16px;
+    border: none;
+}
+
+#ordersTable tbody tr {
+    border-bottom: 1px solid rgba(23, 26, 32, 0.04);
+    transition: all 0.2s ease;
+}
+
+#ordersTable tbody tr:hover {
+    background: rgba(62, 106, 225, 0.03);
+    cursor: pointer;
+}
+
+#ordersTable tbody td {
+    padding: 16px 12px;
+    color: var(--tesla-dark-gray);
+    vertical-align: middle;
+    border: none;
+}
+
+/* Компактные строки */
+#ordersTable tbody tr {
+    height: 96px;
+}
+
+/* Улучшенное отображение товара */
+.product-info-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.order-id-compact {
+    font-weight: 700;
+    color: var(--tesla-black);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.product-description-compact {
+    font-size: 13px;
+    color: var(--tesla-gray);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 360px;
+}
+
+.product-date-compact {
+    font-size: 11px;
+    color: var(--tesla-light-gray);
+}
+
+/* Warehouse column improvements */
+.warehouse-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.warehouse-photo-mini {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.warehouse-photo-mini:hover {
+    transform: scale(1.1);
+}
+
+.warehouse-photo-placeholder {
+    width: 40px;
+    height: 40px;
+    background: var(--tesla-silver);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--tesla-light-gray);
+}
+
+/* ========================================
+   BADGES (Tesla Style)
+   ======================================== */
+.badge {
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+}
+
+.status-created { background: var(--tesla-blue); }
+.status-paid { background: var(--tesla-gray); }
+.status-shipped { background: #fbbf24; color: var(--tesla-black); }
+.status-delivered { background: var(--tesla-green); }
+.status-cancelled { background: var(--tesla-red); }
+
+/* ========================================
+   PRODUCT THUMBNAILS
+   ======================================== */
+.product-thumbnail {
+    border: 2px solid var(--tesla-silver);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px var(--tesla-shadow);
+}
+
+.product-thumbnail:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 16px var(--tesla-shadow-hover);
+    border-color: var(--tesla-black);
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+#ordersTable a {
+    color: var(--tesla-blue);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+#ordersTable a:hover {
+    color: var(--tesla-black);
+}
+
+/* ========================================
+   CODE & TRACKING NUMBERS
+   ======================================== */
+code {
+    background: var(--tesla-black);
+    color: var(--tesla-white);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+    letter-spacing: 0.3px;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes highlight {
+    0% { background: rgba(62, 106, 225, 0.15); }
+    100% { background: transparent; }
+}
+
+tr.new-order {
+    animation: highlight 2s ease-out;
+}
+
+/* ========================================
+   WAREHOUSE RECEIVED STYLING
+   ======================================== */
+tr.warehouse-received {
+    background: linear-gradient(90deg, rgba(0, 183, 79, 0.05), transparent) !important;
+    border-left: 3px solid var(--tesla-green);
+}
+
+tr.warehouse-received:hover {
+    background: linear-gradient(90deg, rgba(0, 183, 79, 0.1), transparent) !important;
+}
+
+.warehouse-checkbox:checked {
+    accent-color: var(--tesla-green);
+}
+
+/* ========================================
+   CHECKBOXES (Tesla Style)
+   ======================================== */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--tesla-black);
+    border-radius: 4px;
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+.fa-inbox {
+    opacity: 0.15;
+    color: var(--tesla-gray);
+}
+
+.text-muted {
+    color: var(--tesla-light-gray) !important;
+}
+
+/* ========================================
+   TOAST NOTIFICATIONS (Tesla Style)
+   ======================================== */
+.toast {
+    background: var(--tesla-black);
+    color: var(--tesla-white);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(23, 26, 32, 0.3);
+    font-weight: 500;
+}
+
+/* ========================================
+   SCROLLBAR (Tesla Style)
+   ======================================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--tesla-silver);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--tesla-gray);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--tesla-black);
+}
+
+/* ========================================
+   MODAL (Tesla Style)
+   ======================================== */
+.modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(23, 26, 32, 0.3);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: var(--tesla-black);
+    color: var(--tesla-white);
+    border: none;
+    padding: 24px;
+}
+
+.modal-title {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.modal-footer {
+    border: none;
+    padding: 20px 24px;
+    background: var(--tesla-silver);
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .navbar-brand { font-size: 18px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 24px; }
+    
+    .table { font-size: 12px; }
+    
+    /* Compact stats на мобильных */
+    .stats-compact {
+        gap: 12px;
+        justify-content: center;
+    }
+    
+    .stat-card {
+        min-width: 110px;
+        padding: 12px 16px;
+    }
+    
+    .stat-value {
+        font-size: 24px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
+    
+    .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .btn-group .btn {
+        flex: 1 1 auto;
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.hidden { display: none; }
+
+.text-tesla-black { color: var(--tesla-black); }
+.text-tesla-red { color: var(--tesla-red); }
+.bg-tesla-black { background: var(--tesla-black); }
+.bg-tesla-white { background: var(--tesla-white); }
+
+/* Smooth transitions for all interactive elements */
+button, a, .card, input, select {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   TOOLTIPS (Enhanced)
+   ======================================== */
+.product-description-tooltip {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted var(--tesla-gray);
+}
+
+.product-description-tooltip:hover {
+    color: var(--tesla-black);
+    border-bottom-color: var(--tesla-black);
+}
+
+/* Native tooltip styling */
+[title] {
+    position: relative;
+}
+
+/* Custom tooltip style (browser default override) */
+.product-description-tooltip[title]:hover::after {
+    white-space: pre-wrap;
+}

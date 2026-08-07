@@ -1,0 +1,57 @@
+# Web Framework
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+
+# Database
+sqlalchemy==2.0.35
+alembic==1.13.3
+
+# Browser Automation (для работы с Taobao)
+playwright==1.48.0
+# или можно использовать selenium==4.25.0
+
+# HTTP клиент
+requests==2.32.3
+httpx==0.26.0
+
+# Парсинг HTML
+beautifulsoup4==4.12.3
+lxml==5.3.0
+
+# Планировщик задач
+apscheduler==3.10.4
+
+# Работа с переменными окружения
+python-dotenv==1.0.1
+
+# Работа с датами
+python-dateutil==2.9.0
+
+# Шаблоны для веб-страниц
+jinja2==3.1.4
+
+# Логирование
+loguru==0.7.2
+
+# Валидация данных
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
+# Telegram Bot
+python-telegram-bot==20.8
+
+# Асинхронная работа с файлами
+aiofiles==23.2.1
+
+# JWT для аутентификации
+python-jose[cryptography]==3.3.0
+PyJWT==2.8.0
+
+# Rate limiting (защита от DDoS)
+slowapi==0.1.9
+
+# Для работы с паролями и хешированием
+passlib[bcrypt]==1.7.4
+
+# Загрузка файлов (для File upload в FastAPI)
+python-multipart==0.0.9

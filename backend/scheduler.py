@@ -129,6 +129,8 @@ class OrderSyncScheduler:
                         existing_order.tracking_number = order_data.get("tracking_number")
                         existing_order.status = order_data.get("status")
                         existing_order.description = order_data.get("description")
+                        existing_order.product_url = order_data.get("product_url")
+                        existing_order.product_image_url = order_data.get("product_image_url")
                         existing_order.total_price = order_data.get("total_price")
                         existing_order.raw_data = order_data.get("raw_data")
                         updated_count += 1
@@ -140,7 +142,11 @@ class OrderSyncScheduler:
                             tracking_number=order_data.get("tracking_number"),
                             status=order_data.get("status", "created"),
                             description=order_data.get("description", ""),
+                            product_url=order_data.get("product_url"),
+                            product_image_url=order_data.get("product_image_url"),
+                            items_count=order_data.get("items_count", 1),
                             total_price=order_data.get("total_price", 0.0),
+                            currency=order_data.get("currency", "CNY"),
                             order_date=order_data.get("order_date"),
                             raw_data=order_data.get("raw_data", {})
                         )
@@ -155,6 +161,9 @@ class OrderSyncScheduler:
                     f"новых заказов: {new_count}, "
                     f"обновлено: {updated_count}"
                 )
+                
+                # Обновляем трек-номера для заказов, у которых их нет
+                self._update_tracking_numbers(db)
                 
             finally:
                 db.close()
@@ -180,6 +189,56 @@ class OrderSyncScheduler:
             "next_run": self.scheduler.get_jobs()[0].next_run_time.isoformat() 
                        if self.scheduler.get_jobs() else None
         }
+    
+    def _update_tracking_numbers(self, db):
+        """
+        Обновляет трек-номера для заказов без них через API
+        
+        Args:
+            db: Активная сессия базы данных
+        """
+        try:
+            # Находим заказы без трек-номера (статус shipped или delivered)
+            orders_without_tracking = db.query(Order).filter(
+                Order.tracking_number.is_(None),
+                Order.status.in_(["shipped", "delivered"])
+            ).limit(10).all()  # Ограничиваем 10 заказами за раз
+            
+            if not orders_without_tracking:
+                logger.debug("Все заказы уже имеют трек-номера (или ещё не отправлены)")
+                return
+            
+            logger.info(f"📦 Обновление трек-номеров для {len(orders_without_tracking)} заказов...")
+            
+            updated = 0
+            for order in orders_without_tracking:
+                try:
+                    # Получаем детальную информацию о заказе
+                    detail_data = self.client.get_order_details(order.order_id)
+                    
+                    if detail_data:
+                        # Извлекаем трек-номер из деталей
+                        tracking_number = TaobaoParser.parse_tracking_from_detail(detail_data)
+                        
+                        if tracking_number:
+                            order.tracking_number = tracking_number
+                            updated += 1
+                            logger.info(f"  ✅ {order.order_id}: {tracking_number}")
+                    
+                    # Небольшая пауза между запросами
+                    import time
+                    time.sleep(0.5)
+                    
+                except Exception as e:
+                    logger.warning(f"  ⚠️ Ошибка получения трек-номера для {order.order_id}: {e}")
+                    continue
+            
+            if updated > 0:
+                db.commit()
+                logger.info(f"✅ Обновлено трек-номеров: {updated}")
+            
+        except Exception as e:
+            logger.error(f"Ошибка обновления трек-номеров: {e}")
     
     def auto_clean_trash(self):
         """

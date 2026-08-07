@@ -1201,23 +1201,26 @@ async def create_first_admin(
     db: Session = Depends(get_db)
 ):
     """
-    Временный endpoint для создания первого администратора
+    Временный endpoint для создания первого суперадминистратора
     Используйте только один раз при первом деплое!
+    
+    После создания первого суперадмина УДАЛИТЕ этот endpoint для безопасности!
     """
     # Проверка секретного кода
     if secret != settings.secret_key:
         raise HTTPException(status_code=403, detail="Invalid secret")
     
-    # Проверяем что администраторов еще нет
-    admin_count = db.query(User).filter(User.is_admin == 1).count()
-    if admin_count > 0:
-        raise HTTPException(status_code=400, detail="Admin already exists")
+    # Проверяем что суперадминистраторов еще нет
+    superadmin_count = db.query(User).filter(User.is_superadmin == 1).count()
+    if superadmin_count > 0:
+        raise HTTPException(status_code=400, detail="Superadmin already exists. Remove this endpoint!")
     
-    # Создаем администратора
+    # Создаем суперадминистратора
     admin = User(
         telegram_id=telegram_id,
         first_name=first_name,
         is_admin=1,
+        is_superadmin=1,
         is_active=1,
         created_at=datetime.now()
     )
@@ -1226,9 +1229,11 @@ async def create_first_admin(
     db.commit()
     db.refresh(admin)
     
+    logger.info(f"✅ First superadmin created: telegram_id={telegram_id}")
+    
     return {
         "status": "success",
-        "message": "First admin created successfully",
+        "message": "First superadmin created successfully! Now remove this endpoint for security.",
         "admin": admin.to_dict()
     }
 

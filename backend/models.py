@@ -151,6 +151,9 @@ class User(Base):
     # Является ли пользователь администратором
     is_admin = Column(Integer, default=0, nullable=False)  # 0 = обычный пользователь, 1 = админ
     
+    # Является ли пользователь суперадминистратором (может назначать других админов)
+    is_superadmin = Column(Integer, default=0, nullable=False)  # 0 = нет, 1 = да
+    
     # Активен ли пользователь
     is_active = Column(Integer, default=1, nullable=False)  # 0 = деактивирован, 1 = активен
     
@@ -177,6 +180,7 @@ class User(Base):
             "username": self.username,
             "photo_url": self.photo_url,
             "is_admin": bool(self.is_admin),
+            "is_superadmin": bool(self.is_superadmin),
             "is_active": bool(self.is_active),
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "last_login": self.last_login.isoformat() if self.last_login else None,

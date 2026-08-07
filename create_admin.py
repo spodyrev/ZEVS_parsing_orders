@@ -36,7 +36,7 @@ def get_telegram_id_instructions():
 
 def create_admin_user():
     """Создать администратора"""
-    print("\n🔧 СОЗДАНИЕ АДМИНИСТРАТОРА СИСТЕМЫ")
+    print("\n🔧 СОЗДАНИЕ СУПЕРАДМИНИСТРАТОРА СИСТЕМЫ")
     print("="*60)
     
     # Инициализируем БД
@@ -48,7 +48,7 @@ def create_admin_user():
     
     # Получаем данные от пользователя
     try:
-        telegram_id = input("Введите Telegram ID администратора: ").strip()
+        telegram_id = input("Введите Telegram ID суперадминистратора: ").strip()
         
         if not telegram_id:
             print("❌ Telegram ID обязателен!")
@@ -62,15 +62,17 @@ def create_admin_user():
             print(f"\n⚠️  Пользователь с Telegram ID {telegram_id} уже существует!")
             print(f"   Имя: {existing_user.first_name} {existing_user.last_name or ''}")
             print(f"   Администратор: {'Да' if existing_user.is_admin else 'Нет'}")
+            print(f"   Суперадминистратор: {'Да' if existing_user.is_superadmin else 'Нет'}")
             print(f"   Активен: {'Да' if existing_user.is_active else 'Нет'}")
             
-            update = input("\nОбновить права администратора? (да/нет): ").strip().lower()
+            update = input("\nОбновить права суперадминистратора? (да/нет): ").strip().lower()
             
             if update in ['да', 'yes', 'y', 'д']:
                 existing_user.is_admin = 1
+                existing_user.is_superadmin = 1
                 existing_user.is_active = 1
                 db.commit()
-                print("\n✅ Права администратора обновлены!")
+                print("\n✅ Права суперадминистратора обновлены!")
                 return True
             else:
                 print("\n❌ Операция отменена")
@@ -81,13 +83,14 @@ def create_admin_user():
         first_name = input("Имя (необязательно, Enter для пропуска): ").strip()
         last_name = input("Фамилия (необязательно, Enter для пропуска): ").strip()
         
-        # Создаем администратора
+        # Создаем суперадминистратора
         admin = User(
             telegram_id=telegram_id,
             phone_number=phone_number if phone_number else None,
             first_name=first_name if first_name else None,
             last_name=last_name if last_name else None,
             is_admin=1,
+            is_superadmin=1,
             is_active=1,
             created_at=datetime.now()
         )
@@ -97,13 +100,14 @@ def create_admin_user():
         db.refresh(admin)
         
         print("\n" + "="*60)
-        print("✅ АДМИНИСТРАТОР УСПЕШНО СОЗДАН!")
+        print("✅ СУПЕРАДМИНИСТРАТОР УСПЕШНО СОЗДАН!")
         print("="*60)
         print(f"ID в БД: {admin.id}")
         print(f"Telegram ID: {admin.telegram_id}")
         print(f"Номер телефона: {admin.phone_number or 'не указан'}")
         print(f"Имя: {admin.first_name or 'не указано'} {admin.last_name or ''}")
         print(f"Администратор: Да")
+        print(f"Суперадминистратор: Да")
         print(f"Активен: Да")
         print("="*60)
         print()
@@ -122,6 +126,13 @@ def create_admin_user():
         print("5. Для управления пользователями перейдите:")
         print("   http://localhost:8000/admin")
         print()
+        print("🎯 КАК СУПЕРАДМИНИСТРАТОР ВЫ МОЖЕТЕ:")
+        print()
+        print("• Добавлять обычных пользователей")
+        print("• Назначать администраторов")
+        print("• Назначать других суперадминистраторов")
+        print("• Управлять всеми пользователями системы")
+        print()
         print("="*60)
         
         db.close()
@@ -131,7 +142,7 @@ def create_admin_user():
         print("\n\n❌ Операция прервана пользователем")
         return False
     except Exception as e:
-        print(f"\n❌ Ошибка создания администратора: {e}")
+        print(f"\n❌ Ошибка создания суперадминистратора: {e}")
         if 'db' in locals():
             db.rollback()
             db.close()
@@ -156,7 +167,16 @@ def list_existing_users():
         print(f"   Telegram ID: {user.telegram_id}")
         print(f"   Телефон: {user.phone_number or 'не указан'}")
         print(f"   Username: @{user.username or 'не указан'}")
-        print(f"   Роль: {'Администратор' if user.is_admin else 'Пользователь'}")
+        
+        # Определяем роль
+        if user.is_superadmin:
+            role = 'Суперадминистратор'
+        elif user.is_admin:
+            role = 'Администратор'
+        else:
+            role = 'Пользователь'
+        
+        print(f"   Роль: {role}")
         print(f"   Статус: {'Активен' if user.is_active else 'Неактивен'}")
         print(f"   Создан: {user.created_at.strftime('%d.%m.%Y %H:%M') if user.created_at else 'н/д'}")
         if user.last_login:
@@ -170,10 +190,10 @@ def list_existing_users():
 def main():
     """Главная функция"""
     print("\n" + "="*60)
-    print("🔐 УПРАВЛЕНИЕ АДМИНИСТРАТОРАМИ СИСТЕМЫ MYSYTE")
+    print("🔐 УПРАВЛЕНИЕ СУПЕРАДМИНИСТРАТОРАМИ СИСТЕМЫ MYSYTE")
     print("="*60)
     print()
-    print("1. Создать нового администратора")
+    print("1. Создать нового суперадминистратора")
     print("2. Показать существующих пользователей")
     print("3. Выход")
     print()

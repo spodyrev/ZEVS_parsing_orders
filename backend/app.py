@@ -28,6 +28,7 @@ from auth import (
     verify_telegram_auth,
     get_current_user,
     get_current_admin_user,
+    get_current_superadmin_user,
     optional_auth
 )
 
@@ -287,6 +288,7 @@ async def admin_panel(
     total_users = len(users)
     active_users = sum(1 for u in users if u.is_active)
     admin_users = sum(1 for u in users if u.is_admin)
+    superadmin_users = sum(1 for u in users if u.is_superadmin)
     
     return templates.TemplateResponse(
         "admin.html",
@@ -295,7 +297,9 @@ async def admin_panel(
             "users": users,
             "total_users": total_users,
             "active_users": active_users,
-            "admin_users": admin_users
+            "admin_users": admin_users,
+            "superadmin_users": superadmin_users,
+            "current_user": admin  # Передаем текущего пользователя для проверки прав
         }
     )
 
@@ -307,12 +311,14 @@ class UserCreate(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     is_admin: int = 0
+    is_superadmin: int = 0
 
 
 class UserUpdate(BaseModel):
     """Схема для обновления пользователя"""
     phone_number: Optional[str] = None
     is_admin: Optional[int] = None
+    is_superadmin: Optional[int] = None
 
 
 @app.get("/api/admin/users")
@@ -355,8 +361,18 @@ async def create_user(
     """
     Создать нового пользователя
     Только для администраторов
+    
+    Суперадмины могут создавать любых пользователей (включая админов и суперадминов)
+    Обычные админы могут создавать только обычных пользователей
     """
     try:
+        # Проверяем права на создание администраторов
+        if (user_data.is_admin or user_data.is_superadmin) and not admin.is_superadmin:
+            raise HTTPException(
+                status_code=403, 
+                detail="Только суперадминистраторы могут назначать права администратора"
+            )
+        
         # Проверяем, не существует ли уже пользователь с таким telegram_id
         existing_user = db.query(User).filter(User.telegram_id == user_data.telegram_id).first()
         if existing_user:
@@ -369,6 +385,7 @@ async def create_user(
             first_name=user_data.first_name,
             last_name=user_data.last_name,
             is_admin=user_data.is_admin,
+            is_superadmin=user_data.is_superadmin,
             is_active=1
         )
         
@@ -402,6 +419,9 @@ async def update_user(
     """
     Обновить данные пользователя
     Только для администраторов
+    
+    Суперадмины могут изменять любые права
+    Обычные админы могут изменять только номер телефона
     """
     try:
         user = db.query(User).filter(User.id == user_id).first()
@@ -409,12 +429,22 @@ async def update_user(
         if not user:
             raise HTTPException(status_code=404, detail="Пользователь не найден")
         
+        # Проверяем права на изменение ролей
+        if (user_data.is_admin is not None or user_data.is_superadmin is not None) and not admin.is_superadmin:
+            raise HTTPException(
+                status_code=403,
+                detail="Только суперадминистраторы могут изменять права администратора"
+            )
+        
         # Обновляем поля
         if user_data.phone_number is not None:
             user.phone_number = user_data.phone_number
         
         if user_data.is_admin is not None:
             user.is_admin = user_data.is_admin
+        
+        if user_data.is_superadmin is not None:
+            user.is_superadmin = user_data.is_superadmin
         
         db.commit()
         db.refresh(user)

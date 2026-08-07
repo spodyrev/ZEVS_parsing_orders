@@ -85,6 +85,15 @@
             font-weight: 600;
         }
         
+        .badge-superadmin {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
         .badge-user {
             background: #e2e8f0;
             color: #4a5568;
@@ -163,25 +172,31 @@
     <div class="container-fluid px-4">
         <!-- Статистика -->
         <div class="row mb-4">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="stats-card">
                     <h3 id="totalUsers">{{ total_users }}</h3>
                     <p>Всего пользователей</p>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="stats-card">
                     <h3 id="activeUsers">{{ active_users }}</h3>
                     <p>Активных</p>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <div class="stats-card">
+                    <h3 id="superadminUsers">{{ superadmin_users }}</h3>
+                    <p>Суперадминов</p>
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class="stats-card">
                     <h3 id="adminUsers">{{ admin_users }}</h3>
                     <p>Администраторов</p>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="stats-card text-end">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
                         <i class="fas fa-plus"></i> Добавить пользователя
@@ -226,7 +241,9 @@
                         </td>
                         <td>{{ user.phone_number or '—' }}</td>
                         <td>
-                            {% if user.is_admin %}
+                            {% if user.is_superadmin %}
+                            <span class="badge-superadmin">Суперадминистратор</span>
+                            {% elif user.is_admin %}
                             <span class="badge-admin">Администратор</span>
                             {% else %}
                             <span class="badge-user">Пользователь</span>
@@ -300,7 +317,18 @@
                             <label class="form-check-label" for="isAdminCheck">
                                 Администратор
                             </label>
+                            <div class="form-text">Может управлять обычными пользователями</div>
                         </div>
+                        
+                        {% if current_user.is_superadmin %}
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" name="is_superadmin" id="isSuperAdminCheck">
+                            <label class="form-check-label" for="isSuperAdminCheck">
+                                Суперадминистратор
+                            </label>
+                            <div class="form-text">Может назначать администраторов и других суперадминов</div>
+                        </div>
+                        {% endif %}
                         
                         <div class="alert alert-info">
                             <i class="fas fa-info-circle"></i>
@@ -341,6 +369,15 @@
                                 Администратор
                             </label>
                         </div>
+                        
+                        {% if current_user.is_superadmin %}
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" name="is_superadmin" id="editIsSuperAdmin">
+                            <label class="form-check-label" for="editIsSuperAdmin">
+                                Суперадминистратор
+                            </label>
+                        </div>
+                        {% endif %}
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -367,7 +404,8 @@
                 phone_number: formData.get('phone_number') || null,
                 first_name: formData.get('first_name') || null,
                 last_name: formData.get('last_name') || null,
-                is_admin: formData.get('is_admin') ? 1 : 0
+                is_admin: formData.get('is_admin') ? 1 : 0,
+                is_superadmin: formData.get('is_superadmin') ? 1 : 0
             };
             
             try {
@@ -399,6 +437,12 @@
                 document.getElementById('editPhoneNumber').value = user.phone_number || '';
                 document.getElementById('editIsAdmin').checked = user.is_admin;
                 
+                // Показываем checkbox суперадмина только если он есть на странице
+                const superAdminCheckbox = document.getElementById('editIsSuperAdmin');
+                if (superAdminCheckbox) {
+                    superAdminCheckbox.checked = user.is_superadmin;
+                }
+                
                 new bootstrap.Modal(document.getElementById('editUserModal')).show();
             } catch (error) {
                 alert('Ошибка загрузки данных пользователя: ' + error.message);
@@ -415,6 +459,12 @@
                 is_admin: formData.get('is_admin') ? 1 : 0
             };
             
+            // Добавляем is_superadmin только если checkbox есть на странице
+            const superAdminCheckbox = document.getElementById('editIsSuperAdmin');
+            if (superAdminCheckbox) {
+                userData.is_superadmin = formData.get('is_superadmin') ? 1 : 0;
+            }
+            
             try {
                 const response = await fetch(`/api/admin/users/${userId}`, {
                     method: 'PUT',
@@ -426,7 +476,8 @@
                     alert('Изменения сохранены!');
                     location.reload();
                 } else {
-                    alert('Ошибка сохранения');
+                    const error = await response.json();
+                    alert('Ошибка: ' + (error.detail || 'Ошибка сохранения'));
                 }
             } catch (error) {
                 alert('Ошибка: ' + error.message);

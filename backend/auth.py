@@ -233,6 +233,36 @@ async def get_current_admin_user(
     return current_user
 
 
+async def get_current_superadmin_user(
+    current_user: User = Depends(get_current_user)
+) -> User:
+    """
+    Dependency для получения текущего пользователя-суперадминистратора
+    
+    Проверяет что пользователь авторизован И является суперадмином
+    
+    Usage:
+        @app.post("/admin/users/{user_id}/make-admin")
+        async def make_admin(superadmin: User = Depends(get_current_superadmin_user)):
+            return {"superadmin_id": superadmin.id}
+    
+    Args:
+        current_user: Текущий пользователь
+    
+    Returns:
+        User объект с is_superadmin=1
+    
+    Raises:
+        HTTPException: 403 если пользователь не суперадмин
+    """
+    if not current_user.is_superadmin:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Недостаточно прав. Требуются права суперадминистратора."
+        )
+    return current_user
+
+
 def optional_auth(
     request: Request,
     db: Session = Depends(get_db)
